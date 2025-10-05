@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Collections - HET IMPEX</title>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>The HET IMPEX Experience: Complimentary Global Insured Shipping & Virtual Consultations.</p>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/db8c51a0-68b2-4855-8121-12b90897b7aa.webp" alt="HET IMPEX Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="products.html" class="active">Jewelry</a>
+                        <div class="mega-menu">
+                            <div class="mega-column">
+                                <h4>Rings</h4>
+                                <ul>
+                                    <li><a href="#rings">Engagement</a></li>
+                                    <li><a href="#rings">Solitaire</a></li>
+                                    <li><a href="#rings">Eternity Bands</a></li>
+                                    <li><a href="#rings">Cocktail Rings</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <h4>Necklaces</h4>
+                                <ul>
+                                    <li><a href="#necklaces">Pendants</a></li>
+                                    <li><a href="#necklaces">High Jewelry</a></li>
+                                    <li><a href="#necklaces">Lariats</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="#collections">The Elysian Collection</a></li>
+                                    <li><a href="#collections">The Signature Solitaires</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-column">
+                                <img src="assets/images/cat-rings.jpg" alt="Featured Jewelry">
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="our-story.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Banner -->
+        <section class="page-banner">
+            <div class="container">
+                <h1>Jewelry Collections</h1>
+                <p>Explore our exquisite range of handcrafted pieces, each embodying Architectural Luminescence.</p>
+                <a href="shopify-admin-dashboard/index2.html" class="btn-primary" style="margin-top: 20px;">Admin Dashboard</a>
+            </div>
+        </section>
+
+        <!-- Dynamic Products Section -->
+        <section id="products" class="product-section">
+            <div class="container">
+                <h2>Our Products</h2>
+                <div id="dynamic-products-grid" class="product-grid">
+                    <!-- Products will be loaded dynamically from localStorage -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h4>HET IMPEX</h4>
+                <p>A legacy of brilliance, reimagined for the modern world. Founded by Shaileshbhai and Het Chovatiya, we sculpt light into wearable art.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="our-story.html">Our Story</a></li>
+                    <li><a href="products.html">Collections</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.html">Surprise Me with Brilliance</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>B-102, naman complex, mahidharpura, surat, 395006 india</p>
+                <p>Email: hetimpex11@gmail.com</p>
+                <p>Phone: +91 8866753519</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 HET IMPEX. A Chovatiya Family Legacy.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load products from localStorage and display them
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductsFromStorage();
+        });
+
+        function loadProductsFromStorage() {
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            const grid = document.getElementById('dynamic-products-grid');
+
+            if (products.length === 0) {
+                grid.innerHTML = '<p>No products available. Add products using the admin dashboard.</p>';
+                return;
+            }
+
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                if (product.status === 'active') { // Only show active products
+                    const productCard = createProductCard(product);
+                    grid.appendChild(productCard);
+                }
+            });
+        }
+
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-item';
+
+            const imageSrc = (product.images && product.images.length > 0) ? product.images[0] : 'https://via.placeholder.com/300x200?text=No+Image';
+
+            card.innerHTML = `
+                <img src="${imageSrc}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                <h3>${product.name}</h3>
+                <p>${product.description || 'No description available'}</p>
+                <a href="contact.html" class="btn-secondary">Inquire</a>
+            `;
+
+            return card;
+        }
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - SoilVita Fertilizers</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Simplified Header -->
+  <header class="checkout-header">
+    <div class="container">
+      <div class="logo">SoilVita Fertilizers</div>
+    </div>
+  </header>
+
+  <div class="checkout-container">
+    <div class="checkout-main">
+      <!-- Step 1: Customer Identity -->
+      <div class="checkout-step">
+        <div class="step-header" onclick="toggleStep(1)">
+          <div class="step-number">1</div>
+          <div class="step-title">
+            <h3 data-i18n="customerIdentity">Customer Identity</h3>
+            <span class="step-subtitle" data-i18n="identitySubtitle">Choose how you'd like to proceed</span>
+          </div>
+          <div class="step-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="step-content" id="step1-content">
+          <div class="identity-options">
+            <div class="identity-option active" onclick="selectIdentity('guest')">
+              <div class="option-radio">
+                <input type="radio" name="identity" value="guest" checked>
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <h4 data-i18n="guestCheckout">Guest Checkout</h4>
+                <p data-i18n="guestDesc">Continue without creating an account</p>
+              </div>
+            </div>
+            <div class="identity-option" onclick="selectIdentity('login')">
+              <div class="option-radio">
+                <input type="radio" name="identity" value="login">
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <h4 data-i18n="login">Login</h4>
+                <p data-i18n="loginDesc">Sign in to your existing account</p>
+              </div>
+            </div>
+            <div class="identity-option" onclick="selectIdentity('signup')">
+              <div class="option-radio">
+                <input type="radio" name="identity" value="signup">
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <h4 data-i18n="signUp">Sign Up</h4>
+                <p data-i18n="signupDesc">Create a new account for faster checkout</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-info">
+            <label for="contact-email" data-i18n="email">Email</label>
+            <input type="email" id="contact-email" placeholder="your@email.com" required>
+            <label for="contact-mobile" data-i18n="mobile">Mobile Number</label>
+            <input type="tel" id="contact-mobile" placeholder="10-digit mobile number" maxlength="10" required>
+          </div>
+          <button class="btn-primary step-continue" onclick="nextStep(1)" data-i18n="continue">Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Shipping Details -->
+      <div class="checkout-step">
+        <div class="step-header" onclick="toggleStep(2)">
+          <div class="step-number">2</div>
+          <div class="step-title">
+            <h3 data-i18n="shippingDetails">Shipping Details</h3>
+            <span class="step-subtitle" data-i18n="shippingSubtitle">Where should we deliver your order?</span>
+          </div>
+          <div class="step-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="step-content collapsed" id="step2-content">
+          <div class="shipping-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="full-name" data-i18n="fullName">Full Name</label>
+                <input type="text" id="full-name" required>
+              </div>
+              <div class="form-group">
+                <label for="mobile-number" data-i18n="mobileNumber">Mobile Number</label>
+                <input type="tel" id="mobile-number" maxlength="10" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pincode" data-i18n="pincode">Pincode</label>
+                <input type="text" id="pincode" maxlength="6" oninput="autoFillAddress()" required>
+              </div>
+              <div class="form-group">
+                <label for="city" data-i18n="city">City</label>
+                <input type="text" id="city" readonly required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="state" data-i18n="state">State</label>
+              <input type="text" id="state" readonly required>
+            </div>
+            <div class="form-group">
+              <label for="address" data-i18n="fullAddress">Full Address</label>
+              <textarea id="address" rows="3" placeholder="House number, street, area" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="landmark" data-i18n="landmark">Landmark (Optional)</label>
+              <input type="text" id="landmark" placeholder="Near temple, market, etc.">
+            </div>
+            <div class="form-checkbox">
+              <input type="checkbox" id="billing-same" checked>
+              <label for="billing-same" data-i18n="billingSame">Billing address is the same as shipping address</label>
+            </div>
+          </div>
+          <button class="btn-primary step-continue" onclick="nextStep(2)" data-i18n="continue">Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment Method -->
+      <div class="checkout-step">
+        <div class="step-header" onclick="toggleStep(3)">
+          <div class="step-number">3</div>
+          <div class="step-title">
+            <h3 data-i18n="paymentMethod">Payment Method</h3>
+            <span class="step-subtitle" data-i18n="paymentSubtitle">Choose your preferred payment option</span>
+          </div>
+          <div class="step-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="step-content collapsed" id="step3-content">
+          <div class="payment-options">
+            <div class="payment-option" onclick="selectPayment('upi')">
+              <div class="option-radio">
+                <input type="radio" name="payment" value="upi" checked>
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <div class="payment-header">
+                  <i class="fab fa-google-pay"></i>
+                  <h4 data-i18n="upi">UPI</h4>
+                  <span class="recommended" data-i18n="recommended">Recommended</span>
+                </div>
+                <p data-i18n="upiDesc">Pay using UPI apps like Google Pay, PhonePe, Paytm</p>
+                <div class="upi-input" id="upi-input">
+                  <input type="text" placeholder="Enter UPI ID (e.g., user@upi)" id="upi-id">
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="selectPayment('card')">
+              <div class="option-radio">
+                <input type="radio" name="payment" value="card">
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <div class="payment-header">
+                  <i class="fas fa-credit-card"></i>
+                  <h4 data-i18n="creditDebitCard">Credit/Debit Card</h4>
+                </div>
+                <p data-i18n="cardDesc">Visa, Mastercard, RuPay accepted</p>
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="selectPayment('netbanking')">
+              <div class="option-radio">
+                <input type="radio" name="payment" value="netbanking">
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <div class="payment-header">
+                  <i class="fas fa-university"></i>
+                  <h4 data-i18n="netBanking">Net Banking</h4>
+                </div>
+                <p data-i18n="netbankingDesc">Pay directly from your bank account</p>
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="selectPayment('wallet')">
+              <div class="option-radio">
+                <input type="radio" name="payment" value="wallet">
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <div class="payment-header">
+                  <i class="fas fa-wallet"></i>
+                  <h4 data-i18n="wallets">Wallets</h4>
+                </div>
+                <p data-i18n="walletDesc">Paytm, Mobikwik, Ola Money, etc.</p>
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="selectPayment('cod')">
+              <div class="option-radio">
+                <input type="radio" name="payment" value="cod">
+                <span class="radio-custom"></span>
+              </div>
+              <div class="option-content">
+                <div class="payment-header">
+                  <i class="fas fa-hand-holding-usd"></i>
+                  <h4 data-i18n="cashOnDelivery">Cash on Delivery</h4>
+                </div>
+                <p data-i18n="codDesc">Pay when you receive your order</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="security-badges">
+            <div class="badge">
+              <i class="fas fa-lock"></i>
+              <span data-i18n="securePayment">Secure Payment</span>
+            </div>
+            <div class="badge">
+              <i class="fas fa-shield-alt"></i>
+              <span data-i18n="sslEncrypted">SSL Encrypted</span>
+            </div>
+            <div class="badge">
+              <i class="fas fa-check-circle"></i>
+              <span data-i18n="verified">Verified by RBI</span>
+            </div>
+          </div>
+
+          <button class="btn-primary place-order-btn" onclick="placeOrder()" data-i18n="placeOrder">Place Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Summary Sidebar -->
+    <div class="order-summary-sidebar">
+      <div class="order-summary">
+        <h3 data-i18n="orderSummary">Order Summary</h3>
+
+        <div class="order-items" id="order-items">
+          <!-- Order items will be loaded here -->
+        </div>
+
+        <div class="order-totals">
+          <div class="total-row">
+            <span data-i18n="subtotal">Subtotal</span>
+            <span id="summary-subtotal">₹0</span>
+          </div>
+          <div class="total-row">
+            <span data-i18n="shipping">Shipping</span>
+            <span id="summary-shipping">₹50</span>
+          </div>
+          <div class="total-row grand-total">
+            <span data-i18n="grandTotal">Grand Total</span>
+            <span id="summary-total">₹0</span>
+          </div>
+        </div>
+
+        <div class="order-security">
+          <i class="fas fa-lock"></i>
+          <span data-i18n="secureCheckout">Secure Checkout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimal Footer -->
+  <footer class="checkout-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="#" data-i18n="privacyPolicy">Privacy Policy</a>
+        <a href="#" data-i18n="termsConditions">Terms & Conditions</a>
+        <a href="#" data-i18n="contactUs">Contact Us</a>
+      </div>
+      <div class="footer-copyright">
+        <p>&copy; 2024 SoilVita Fertilizers. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js2/products2.js"></script>
+  <script src="js2/i18n2.js"></script>
+  <script src="js2/script2.js"></script>
+  <script>
+    let currentStep = 1;
+    let selectedIdentity = 'guest';
+    let selectedPayment = 'upi';
+
+    // Initialize checkout
+    document.addEventListener('DOMContentLoaded', () => {
+      loadOrderSummary();
+      updateUI();
+    });
+
+    // Toggle step accordion
+    function toggleStep(stepNumber) {
+      const content = document.getElementById(`step${stepNumber}-content`);
+      const toggle = content.previousElementSibling.querySelector('.step-toggle i');
+
+      if (content.classList.contains('collapsed')) {
+        // Open this step
+        content.classList.remove('collapsed');
+        toggle.style.transform = 'rotate(180deg)';
+      } else {
+        // Close this step (only if not current step)
+        if (stepNumber !== currentStep) {
+          content.classList.add('collapsed');
+          toggle.style.transform = 'rotate(0deg)';
+        }
+      }
+    }
+
+    // Select identity option
+    function selectIdentity(type) {
+      selectedIdentity = type;
+      document.querySelectorAll('.identity-option').forEach(option => {
+        option.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+      const radio = event.currentTarget.querySelector('input[type="radio"]');
+      radio.checked = true;
+    }
+
+    // Select payment method
+    function selectPayment(method) {
+      selectedPayment = method;
+      document.querySelectorAll('.payment-option').forEach(option => {
+        option.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+      const radio = event.currentTarget.querySelector('input[type="radio"]');
+      radio.checked = true;
+
+      // Show/hide UPI input
+      const upiInput = document.getElementById('upi-input');
+      if (method === 'upi') {
+        upiInput.style.display = 'block';
+      } else {
+        upiInput.style.display = 'none';
+      }
+    }
+
+    // Next step
+    function nextStep(stepNumber) {
+      if (validateStep(stepNumber)) {
+        // Close current step
+        const currentContent = document.getElementById(`step${stepNumber}-content`);
+        currentContent.classList.add('collapsed');
+        currentContent.previousElementSibling.querySelector('.step-toggle i').style.transform = 'rotate(0deg)';
+
+        // Open next step
+        currentStep = stepNumber + 1;
+        if (currentStep <= 3) {
+          toggleStep(currentStep);
+        }
+      }
+    }
+
+    // Validate step
+    function validateStep(stepNumber) {
+      let isValid = true;
+      const errors = [];
+
+      if (stepNumber === 1) {
+        const email = document.getElementById('contact-email').value;
+        const mobile = document.getElementById('contact-mobile').value;
+
+        if (!email || !email.includes('@')) {
+          errors.push('Please enter a valid email address');
+          isValid = false;
+        }
+
+        if (!mobile || mobile.length !== 10 || !/^\d+$/.test(mobile)) {
+          errors.push('Please enter a valid 10-digit mobile number');
+          isValid = false;
+        }
+      }
+
+      if (stepNumber === 2) {
+        const name = document.getElementById('full-name').value;
+        const mobile = document.getElementById('mobile-number').value;
+        const pincode = document.getElementById('pincode').value;
+        const address = document.getElementById('address').value;
+
+        if (!name.trim()) {
+          errors.push('Please enter your full name');
+          isValid = false;
+        }
+
+        if (!mobile || mobile.length !== 10 || !/^\d+$/.test(mobile)) {
+          errors.push('Please enter a valid 10-digit mobile number');
+          isValid = false;
+        }
+
+        if (!pincode || pincode.length !== 6 || !/^\d+$/.test(pincode)) {
+          errors.push('Please enter a valid 6-digit pincode');
+          isValid = false;
+        }
+
+        if (!address.trim()) {
+          errors.push('Please enter your full address');
+          isValid = false;
+        }
+      }
+
+      if (!isValid) {
+        alert(errors.join('\n'));
+      }
+
+      return isValid;
+    }
+
+    // Auto-fill address based on pincode
+    function autoFillAddress() {
+      const pincode = document.getElementById('pincode').value;
+
+      // Mock pincode data (in real app, this would be an API call)
+      const pincodeData = {
+        '380001': { city: 'Ahmedabad', state: 'Gujarat' },
+        '110001': { city: 'New Delhi', state: 'Delhi' },
+        '400001': { city: 'Mumbai', state: 'Maharashtra' },
+        '560001': { city: 'Bangalore', state: 'Karnataka' },
+        '700001': { city: 'Kolkata', state: 'West Bengal' }
+      };
+
+      if (pincode.length === 6 && pincodeData[pincode]) {
+        document.getElementById('city').value = pincodeData[pincode].city;
+        document.getElementById('state').value = pincodeData[pincode].state;
+      } else if (pincode.length === 6) {
+        // Default for Gujarat pincodes
+        if (pincode.startsWith('38')) {
+          document.getElementById('city').value = 'Ahmedabad';
+          document.getElementById('state').value = 'Gujarat';
+        } else {
+          document.getElementById('city').value = '';
+          document.getElementById('state').value = '';
+        }
+      }
+    }
+
+    // Load order summary
+    function loadOrderSummary() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const itemsContainer = document.getElementById('order-items');
+      const subtotalEl = document.getElementById('summary-subtotal');
+      const shippingEl = document.getElementById('summary-shipping');
+      const totalEl = document.getElementById('summary-total');
+
+      itemsContainer.innerHTML = '';
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+          subtotal += itemTotal;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'order-item';
+          itemEl.innerHTML = `
+            <img src="${product.image}" alt="${product.name[currentLang]}">
+            <div class="order-item-details">
+              <h4>${product.name[currentLang]}</h4>
+              <p>Qty: ${item.qty}</p>
+              <p class="item-price">₹${itemTotal}</p>
+            </div>
+          `;
+          itemsContainer.appendChild(itemEl);
+        }
+      });
+
+      const shipping = subtotal >= 999 ? 0 : 50;
+      const total = subtotal + shipping;
+
+      subtotalEl.textContent = `₹${subtotal}`;
+      shippingEl.textContent = shipping === 0 ? 'Free' : `₹${shipping}`;
+      totalEl.textContent = `₹${total}`;
+    }
+
+    // Place order
+    function placeOrder() {
+      if (!validateStep(3)) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        alert('Your cart is empty');
+        return;
+      }
+
+      // Collect all form data
+      const orderData = {
+        identity: selectedIdentity,
+        contact: {
+          email: document.getElementById('contact-email').value,
+          mobile: document.getElementById('contact-mobile').value
+        },
+        shipping: {
+          name: document.getElementById('full-name').value,
+          mobile: document.getElementById('mobile-number').value,
+          pincode: document.getElementById('pincode').value,
+          city: document.getElementById('city').value,
+          state: document.getElementById('state').value,
+          address: document.getElementById('address').value,
+          landmark: document.getElementById('landmark').value,
+          billingSame: document.getElementById('billing-same').checked
+        },
+        payment: {
+          method: selectedPayment,
+          upiId: selectedPayment === 'upi' ? document.getElementById('upi-id').value : null
+        },
+        items: cart,
+        totals: {
+          subtotal: document.getElementById('summary-subtotal').textContent,
+          shipping: document.getElementById('summary-shipping').textContent,
+          total: document.getElementById('summary-total').textContent
+        }
+      };
+
+      // Create WhatsApp message
+      let message = `🛒 New Order - SoilVita Fertilizers\n\n`;
+      message += `👤 Customer: ${orderData.shipping.name}\n`;
+      message += `📧 Email: ${orderData.contact.email}\n`;
+      message += `📱 Mobile: ${orderData.contact.mobile}\n\n`;
+
+      message += `📍 Shipping Address:\n`;
+      message += `${orderData.shipping.address}\n`;
+      if (orderData.shipping.landmark) message += `Landmark: ${orderData.shipping.landmark}\n`;
+      message += `${orderData.shipping.city}, ${orderData.shipping.state} - ${orderData.shipping.pincode}\n\n`;
+
+      message += `💳 Payment Method: ${selectedPayment.toUpperCase()}`;
+      if (selectedPayment === 'upi' && orderData.payment.upiId) {
+        message += ` (${orderData.payment.upiId})`;
+      }
+      message += `\n\n🛍️ Order Items:\n`;
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          message += `• ${product.name.en} (Qty: ${item.qty}) - ₹${product.priceINR * item.qty}\n`;
+        }
+      });
+
+      message += `\n💰 ${orderData.totals.subtotal} + ${orderData.totals.shipping} = ${orderData.totals.total}\n\n`;
+      message += `Please confirm payment and arrange delivery.`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappURL = `https://wa.me/918866753519?text=${encodedMessage}`;
+
+      // Clear cart and redirect
+      localStorage.removeItem('cart');
+      window.location.href = whatsappURL;
+    }
+  </script>
+</body>
+</html>

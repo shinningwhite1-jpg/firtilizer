@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Product - SoilVita Admin</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .admin-add-product {
+      min-height: 100vh;
+      background: #f8f9fa;
+    }
+
+    .admin-header {
+      background: #1B4D3E;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .admin-nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .admin-nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .admin-nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .admin-content {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .form-header h2 {
+      color: #1B4D3E;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+      color: #666;
+    }
+
+    .form-section {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      color: #1B4D3E;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #1B4D3E;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.75rem;
+      border: 2px solid #e9ecef;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #1B4D3E;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #eee;
+    }
+
+    .btn-primary {
+      background: #1B4D3E;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #0F2F24;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #545b62;
+    }
+
+    .required {
+      color: #dc3545;
+    }
+
+    .help-text {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .admin-content {
+        padding: 1rem;
+      }
+
+      .form-container {
+        padding: 1rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="admin-add-product">
+  <header class="admin-header">
+    <h1><i class="fas fa-plus-circle"></i> Add New Product</h1>
+    <nav class="admin-nav">
+      <a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="admin-products.html"><i class="fas fa-boxes"></i> Products</a>
+      <a href="#" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+  </header>
+
+  <div class="admin-content">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Create New Fertilizer Product</h2>
+        <p>Fill in all the details below to add a new product to your catalog</p>
+      </div>
+
+      <form id="product-form">
+        <!-- Section A: Product Title -->
+        <div class="form-section">
+          <h3 class="section-title">📝 Section A: Product Title</h3>
+          <div class="form-group">
+            <label for="product-title">Product Title <span class="required">*</span></label>
+            <input type="text" id="product-title" required
+                   placeholder="e.g., SoilVita Premium Organic Vermicompost Fertilizer - 5kg | 100% Natural Earthworm Manure for Lush Plant Growth">
+            <div class="help-text">
+              Create a descriptive title that includes brand, product type, weight, key benefits, and main selling points for better search visibility.
+            </div>
+          </div>
+        </div>
+
+        <!-- Section B: Product Data -->
+        <div class="form-section">
+          <h3 class="section-title">📊 Section B: Product Data</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="product-sku">SKU (Stock Keeping Unit) <span class="required">*</span></label>
+              <input type="text" id="product-sku" required placeholder="e.g., SOLVITA-VERMI-5KG">
+              <div class="help-text">Unique code for inventory tracking</div>
+            </div>
+            <div class="form-group">
+              <label for="regular-price">Regular Price (₹) <span class="required">*</span></label>
+              <input type="number" id="regular-price" required placeholder="499">
+              <div class="help-text">Standard selling price</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="sale-price">Sale Price (₹) <span class="required">*</span></label>
+              <input type="number" id="sale-price" required placeholder="399">
+              <div class="help-text">Discounted price to show savings</div>
+            </div>
+            <div class="form-group">
+              <label for="stock-quantity">Stock Quantity <span class="required">*</span></label>
+              <input type="number" id="stock-quantity" required placeholder="150">
+              <div class="help-text">Current inventory count</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section C: Categorization & Images -->
+        <div class="form-section">
+          <h3 class="section-title">📂 Section C: Categorization & Images</h3>
+          <div class="form-group">
+            <label>Product Category <span class="required">*</span></label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="organic" value="Organic Fertilizers">
+                <label for="organic">Organic Fertilizers</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="chemical" value="Chemical Fertilizers">
+                <label for="chemical">Chemical Fertilizers</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="bio" value="Bio-Fertilizers">
+                <label for="bio">Bio-Fertilizers</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="soil" value="Soil Conditioners">
+                <label for="soil">Soil Conditioners</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="main-image-url">Product Image URL (Main) <span class="required">*</span></label>
+            <input type="url" id="main-image-url" required
+                   placeholder="https://example.com/product-image.jpg">
+            <div class="help-text">
+              Enter the full URL of the main product image. Recommended: High-resolution image with white background.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gallery-image-urls">Product Gallery URLs (Additional Images)</label>
+            <textarea id="gallery-image-urls"
+                      placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg&#10;https://example.com/image3.jpg"
+                      rows="4"></textarea>
+            <div class="help-text">
+              Enter one image URL per line for additional product images (different angles, lifestyle shots, results). Leave empty if none.
+            </div>
+          </div>
+        </div>
+
+        <!-- Section D: Search & SEO -->
+        <div class="form-section">
+          <h3 class="section-title">🔍 Section D: Search & SEO</h3>
+          <div class="form-group">
+            <label for="product-tags">Product Tags/Keywords</label>
+            <input type="text" id="product-tags" placeholder="vermicompost, organic, manure, plant food, fertilizer">
+            <div class="help-text">Comma-separated keywords to help customers find this product</div>
+          </div>
+        </div>
+
+        <!-- Section E: Detailed Description -->
+        <div class="form-section">
+          <h3 class="section-title">🌱 Section E: Detailed Description</h3>
+          <div class="form-group">
+            <label for="product-description">Product Description <span class="required">*</span></label>
+            <textarea id="product-description" required placeholder="Write a compelling product description that highlights benefits, features, and usage instructions..."></textarea>
+            <div class="help-text">Write an engaging description that explains what makes this product special and how it benefits customers' plants.</div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="saveAsDraft()">Save as Draft</button>
+          <button type="submit" class="btn-primary">Publish Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js2/products2.js"></script>
+  <script>
+    // Check admin authentication
+    if (localStorage.getItem('adminLoggedIn') !== 'true') {
+      window.location.href = 'admin.html';
+    }
+
+    let editMode = false;
+    let editIndex = -1;
+
+    // Check if editing existing product
+    const editProductIndex = localStorage.getItem('editProductIndex');
+    if (editProductIndex !== null) {
+      editMode = true;
+      editIndex = parseInt(editProductIndex);
+      loadProductForEditing(editIndex);
+      localStorage.removeItem('editProductIndex');
+    }
+
+    function loadProductForEditing(index) {
+      // Load products from storage if available
+      let displayProducts = products;
+      try {
+        const storedProducts = localStorage.getItem('adminProducts');
+        if (storedProducts) {
+          const parsedProducts = JSON.parse(storedProducts);
+          displayProducts = [...products, ...parsedProducts];
+        }
+      } catch (e) {
+        console.warn('Error loading stored products:', e);
+      }
+
+      const product = displayProducts[index];
+      if (!product) return;
+
+      document.getElementById('product-title').value = product.name.en;
+      document.getElementById('product-sku').value = product.sku;
+      document.getElementById('regular-price').value = product.priceINR;
+      document.getElementById('sale-price').value = product.priceINR; // Assuming sale price is same as regular for now
+      document.getElementById('stock-quantity').value = product.stock;
+      document.getElementById('product-description').value = product.longDesc.en;
+      document.getElementById('product-tags').value = product.tags ? product.tags.join(', ') : '';
+
+      // Load image URLs
+      document.getElementById('main-image-url').value = product.image || '';
+      if (product.images && product.images.length > 0) {
+        document.getElementById('gallery-image-urls').value = product.images.join('\n');
+      }
+
+      // Load categories
+      if (product.category === 'Organic') {
+        document.getElementById('organic').checked = true;
+      } else if (product.category === 'Chemical') {
+        document.getElementById('chemical').checked = true;
+      } else if (product.mainCategory === 'Bio-Fertilizer') {
+        document.getElementById('bio').checked = true;
+      }
+
+      // Update form title
+      document.querySelector('.form-header h2').textContent = 'Edit Product';
+    }
+
+    // Form submission
+    document.getElementById('product-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get selected category
+      let selectedCategory = 'Chemical';
+      let mainCategory = 'Nitrogen';
+
+      if (document.getElementById('organic').checked) {
+        selectedCategory = 'Organic';
+        mainCategory = 'Bio-Fertilizer';
+      } else if (document.getElementById('bio').checked) {
+        selectedCategory = 'Organic';
+        mainCategory = 'Bio-Fertilizer';
+      } else if (document.getElementById('chemical').checked) {
+        selectedCategory = 'Chemical';
+        mainCategory = 'Nitrogen';
+      }
+
+      // Get image URLs
+      const mainImageUrl = document.getElementById('main-image-url').value.trim();
+      const galleryUrlsText = document.getElementById('gallery-image-urls').value.trim();
+      const galleryUrls = galleryUrlsText ? galleryUrlsText.split('\n').map(url => url.trim()).filter(url => url) : [];
+
+      const formData = {
+        name: {
+          en: document.getElementById('product-title').value,
+          hi: document.getElementById('product-title').value, // Would need translation
+          gu: document.getElementById('product-title').value
+        },
+        sku: document.getElementById('product-sku').value,
+        priceINR: parseInt(document.getElementById('regular-price').value),
+        stock: parseInt(document.getElementById('stock-quantity').value),
+        longDesc: {
+          en: document.getElementById('product-description').value,
+          hi: document.getElementById('product-description').value,
+          gu: document.getElementById('product-description').value
+        },
+        category: selectedCategory,
+        mainCategory: mainCategory,
+        image: mainImageUrl || 'images/product-placeholder.jpg',
+        images: galleryUrls.length > 0 ? galleryUrls : [mainImageUrl || 'images/product-placeholder.jpg'],
+        rating: 4.5,
+        reviews: 0,
+        tags: document.getElementById('product-tags').value.split(',').map(tag => tag.trim())
+      };
+
+      if (editMode) {
+        // Load current products and update
+        let displayProducts = products;
+        try {
+          const storedProducts = localStorage.getItem('adminProducts');
+          if (storedProducts) {
+            const parsedProducts = JSON.parse(storedProducts);
+            displayProducts = [...products, ...parsedProducts];
+          }
+        } catch (e) {
+          console.warn('Error loading stored products:', e);
+        }
+
+        // Update the product
+        displayProducts[editIndex] = { ...displayProducts[editIndex], ...formData };
+
+        // Save back only the added products
+        const addedProducts = displayProducts.filter(p => !products.find(dp => dp.id === p.id));
+        localStorage.setItem('adminProducts', JSON.stringify(addedProducts));
+
+        alert('Product updated successfully!');
+      } else {
+        // Add new product with sequential ID
+        formData.id = getNextProductId();
+        products.push(formData);
+        alert(`Product added successfully! Product ID: ${formData.id}`);
+      }
+
+      // Save to localStorage for persistence
+      saveProductsToStorage();
+
+      window.location.href = 'admin-products.html';
+    });
+
+    function saveAsDraft() {
+      alert('Draft saved! (In a real application, this would save to database)');
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem('adminLoggedIn');
+      localStorage.removeItem('adminLoginTime');
+      window.location.href = 'admin.html';
+    }
+  </script>
+</body>
+</html>

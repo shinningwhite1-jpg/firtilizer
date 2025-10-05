@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - SoilVita Fertilizers</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SoilVita Fertilizers</div>
+      <ul>
+        <li><a href="index2.html" data-i18n="home">Home</a></li>
+        <li><a href="shop2.html" data-i18n="shop">Shop</a></li>
+        <li><a href="about2.html" data-i18n="about">About</a></li>
+        <li><a href="contact2.html" data-i18n="contact">Contact</a></li>
+        <li><a href="cart2.html" data-i18n="cart">Cart</a></li>
+      </ul>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button onclick="switchLanguage('en')" data-i18n="english">EN</button>
+          <button onclick="switchLanguage('hi')" data-i18n="hindi">HI</button>
+          <button onclick="switchLanguage('gu')" data-i18n="gujarati">GU</button>
+        </div>
+        <div class="cart-icon" onclick="toggleMiniCart()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mini Cart Drawer -->
+  <div class="mini-cart-overlay" id="mini-cart-overlay" onclick="toggleMiniCart()"></div>
+  <div class="mini-cart-drawer" id="mini-cart-drawer">
+    <div class="mini-cart-header">
+      <h3 data-i18n="cart">Cart</h3>
+      <button class="close-btn" onclick="toggleMiniCart()">×</button>
+    </div>
+    <div class="mini-cart-content" id="mini-cart-content">
+      <!-- Cart items will be loaded here -->
+    </div>
+    <div class="mini-cart-footer">
+      <div class="mini-cart-actions">
+        <button onclick="window.location.href='cart2.html'" class="btn-secondary" data-i18n="viewFullCart">View Full Cart</button>
+        <button onclick="window.location.href='checkout2.html'" class="btn-primary" data-i18n="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2 data-i18n="ourMission">Our Mission</h2>
+    <div class="mission-content">
+      <p class="mission-concise">To empower farmers and gardeners with innovative, sustainable solutions that restore soil vitality and cultivate abundant growth for a healthier planet.</p>
+
+      <div class="mission-detailed">
+        <p>At SolVita Fertilizers, our mission is to be the trusted partner in growth for every farmer, gardener, and agricultural professional. We are dedicated to pioneering the development of high-efficacy fertilizers that work in harmony with nature, not against it.</p>
+
+        <p>We believe that the future of agriculture lies in a balanced approach—one that combines cutting-edge scientific research with a deep respect for the environment. Our goal is to:</p>
+
+        <ul class="mission-goals">
+          <li><strong>Enhance Soil Health:</strong> Go beyond simple nutrition by creating products that rebuild soil structure, promote beneficial microbial life, and ensure long-term fertility.</li>
+          <li><strong>Maximize Yields & Quality:</strong> Provide growers with reliable, scientifically-proven formulas that increase crop production, improve nutrient density, and deliver a superior harvest.</li>
+          <li><strong>Champion Sustainability:</strong> Lead the way in creating eco-friendly solutions that reduce chemical runoff, conserve water, and contribute to a resilient and sustainable food system for generations to come.</li>
+        </ul>
+
+        <p>Through unwavering commitment to quality, research, and our customers' success, we aim to cultivate a future where both communities and the land can thrive.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 data-i18n="ourStory">Our Story</h2>
+    <div class="story-content">
+      <p>SolVita Fertilizers wasn't born in a boardroom; it was born in the rich, fertile soil of Gujarat, from a deep-rooted passion for agriculture that has spanned generations.</p>
+
+      <p>Our journey began with our founders, who grew up in a family of farmers. They witnessed firsthand the challenges faced by the local farming community: declining soil health, unpredictable yields, and an increasing reliance on harsh chemical inputs that offered short-term gains but long-term consequences. They saw the land that had sustained their family for decades begin to lose its vitality.</p>
+
+      <p>Driven by a desire to restore this balance, they embarked on a mission. The question was simple yet profound: How can we merge the wisdom of traditional farming with the precision of modern science to create something better?</p>
+
+      <p>Years were spent in rigorous research, collaborating with agronomists, soil scientists, and local farmers. We tested countless formulations, focusing on creating bio-available nutrients that nourish the plant and enrich the soil simultaneously. We weren't just creating fertilizer; we were creating a complete soil rejuvenation system.</p>
+
+      <p>This is how SolVita was born—a name derived from 'Sol' (Soil) and 'Vita' (Life). It represents our core belief that true, sustainable growth begins with life in the soil.</p>
+
+      <p>From our humble beginnings, experimenting in a small lab, we have grown into a trusted name for thousands of farmers and home gardeners across the region. Every bag of SolVita fertilizer is a product of our story and a testament to our commitment: to honor the land, to empower the grower, and to cultivate a greener, more prosperous future for all.</p>
+
+      <p class="story-invitation">We invite you to join us on this journey.</p>
+    </div>
+    <img src="images/about.jpg" alt="About SolVita" style="width: 100%; max-width: 600px; margin: 2rem 0; border-radius: 8px;">
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3 data-i18n="footerContact">Contact Us</h3>
+        <p data-i18n="footerAddress">123 Farm Road, Gujarat, India</p>
+        <p data-i18n="footerPhone">+91 98765 43210</p>
+        <p data-i18n="footerEmail">info@soilvita.com</p>
+      </div>
+      <div>
+        <h3 data-i18n="footerLinks">Quick Links</h3>
+        <a href="index2.html" data-i18n="home">Home</a>
+        <a href="shop2.html" data-i18n="shop">Shop</a>
+        <a href="about2.html" data-i18n="about">About</a>
+        <a href="contact2.html" data-i18n="contact">Contact</a>
+      </div>
+      <div class="social-icons">
+        <h3 data-i18n="footerSocial">Follow Us</h3>
+        <a href="https://www.facebook.com/het.chovatiya" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/het_impex?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js2/products2.js"></script>
+  <script src="js2/i18n2.js"></script>
+  <script src="js2/script2.js"></script>
+  <script>
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'block' : 'none';
+      }
+    }
+
+    // Toggle mini cart
+    function toggleMiniCart() {
+      const overlay = document.getElementById('mini-cart-overlay');
+      const drawer = document.getElementById('mini-cart-drawer');
+      if (overlay && drawer) {
+        overlay.classList.toggle('active');
+        drawer.classList.toggle('active');
+        if (drawer.classList.contains('active')) {
+          renderMiniCart();
+        }
+      }
+    }
+
+    // Render mini cart
+    function renderMiniCart() {
+      const container = document.getElementById('mini-cart-content');
+      if (!container) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty</p>';
+        return;
+      }
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'mini-cart-item';
+          itemEl.innerHTML = `
+            <img src="${product.image}" alt="${product.name[currentLang]}">
+            <div class="mini-cart-item-details">
+              <h4>${product.name[currentLang]}</h4>
+              <div class="mini-cart-quantity">
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty - 1})">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+              <div class="mini-cart-price">₹${itemTotal}</div>
+            </div>
+            <button class="mini-cart-remove" onclick="removeFromMiniCart(${item.id})">×</button>
+          `;
+          container.appendChild(itemEl);
+        }
+      });
+    }
+
+    // Update quantity in mini cart
+    function updateMiniCartQuantity(id, newQty) {
+      if (newQty <= 0) {
+        removeFromMiniCart(id);
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        renderMiniCart();
+      }
+    }
+
+    // Remove from mini cart
+    function removeFromMiniCart(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      renderMiniCart();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartBadge();
+      updateUI();
+    });
+  </script>
+</body>
+</html>

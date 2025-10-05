@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - SoilVita Fertilizers</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SoilVita Fertilizers</div>
+      <ul>
+        <li><a href="index2.html" data-i18n="home">Home</a></li>
+        <li><a href="shop2.html" data-i18n="shop">Shop</a></li>
+        <li><a href="about2.html" data-i18n="about">About</a></li>
+        <li><a href="contact2.html" data-i18n="contact">Contact</a></li>
+        <li><a href="cart2.html" data-i18n="cart">Cart</a></li>
+      </ul>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button onclick="switchLanguage('en')" data-i18n="english">EN</button>
+          <button onclick="switchLanguage('hi')" data-i18n="hindi">HI</button>
+          <button onclick="switchLanguage('gu')" data-i18n="gujarati">GU</button>
+        </div>
+        <div class="cart-icon" onclick="toggleMiniCart()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mini Cart Drawer -->
+  <div class="mini-cart-overlay" id="mini-cart-overlay" onclick="toggleMiniCart()"></div>
+  <div class="mini-cart-drawer" id="mini-cart-drawer">
+    <div class="mini-cart-header">
+      <h3 data-i18n="cart">Cart</h3>
+      <button class="close-btn" onclick="toggleMiniCart()">×</button>
+    </div>
+    <div class="mini-cart-content" id="mini-cart-content">
+      <!-- Cart items will be loaded here -->
+    </div>
+    <div class="mini-cart-footer">
+      <div class="mini-cart-actions">
+        <button onclick="window.location.href='cart2.html'" class="btn-secondary" data-i18n="viewFullCart">View Full Cart</button>
+        <button onclick="window.location.href='checkout2.html'" class="btn-primary" data-i18n="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="shop-section">
+    <div class="shop-container">
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-header">
+          <h3 data-i18n="filters">Filters</h3>
+          <button class="filter-toggle" onclick="toggleFilters()">✕</button>
+        </div>
+
+        <div class="filter-group collapsible">
+          <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+            <h4 data-i18n="cropType">Crop Type</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="filter-options">
+            <label><input type="checkbox" value="Rice" data-filter="crop"> Rice</label>
+            <label><input type="checkbox" value="Wheat" data-filter="crop"> Wheat</label>
+            <label><input type="checkbox" value="Cotton" data-filter="crop"> Cotton</label>
+            <label><input type="checkbox" value="Vegetables" data-filter="crop"> Vegetables</label>
+            <label><input type="checkbox" value="All Crops" data-filter="crop"> All Crops</label>
+          </div>
+        </div>
+
+        <div class="filter-group collapsible">
+          <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+            <h4 data-i18n="nutrientType">Nutrient Type</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="filter-options">
+            <label><input type="checkbox" value="Nitrogen" data-filter="nutrient"> Nitrogen</label>
+            <label><input type="checkbox" value="Phosphate" data-filter="nutrient"> Phosphate</label>
+            <label><input type="checkbox" value="Potash" data-filter="nutrient"> Potash</label>
+            <label><input type="checkbox" value="Bio-Fertilizer" data-filter="nutrient"> Bio-Fertilizer</label>
+          </div>
+        </div>
+
+        <div class="filter-group collapsible">
+          <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+            <h4 data-i18n="form">Form</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="filter-options">
+            <label><input type="checkbox" value="Granular" data-filter="form"> Granular</label>
+            <label><input type="checkbox" value="Liquid" data-filter="form"> Liquid</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <div class="price-slider">
+            <input type="range" id="min-price" min="0" max="1000" value="0" step="50">
+            <input type="range" id="max-price" min="0" max="1000" value="1000" step="50">
+            <div class="price-display">
+              <span id="min-price-display">₹0</span> - <span id="max-price-display">₹1000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button onclick="applyFilters()" class="btn-primary">Apply Filters</button>
+          <button onclick="clearFilters()" class="btn-secondary" data-i18n="clearFilters">Clear All</button>
+        </div>
+      </aside>
+
+      <!-- Products Section -->
+      <main class="products-main">
+        <div class="products-header">
+          <h2 data-i18n="shop">Shop</h2>
+          <div class="products-controls">
+            <span id="product-count">Showing 6 products</span>
+            <div class="sorting">
+              <label data-i18n="sortBy">Sort by:</label>
+              <select id="sort-select" onchange="sortProducts()">
+                <option value="name" data-i18n="name">Name</option>
+                <option value="price-low" data-i18n="priceLow">Price: Low to High</option>
+                <option value="price-high" data-i18n="priceHigh">Price: High to Low</option>
+                <option value="rating" data-i18n="rating">Rating</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button class="mobile-filter-btn" onclick="toggleFilters()">Filter Products</button>
+
+        <div class="products-grid" id="products-container">
+          <!-- Products will be rendered here -->
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3 data-i18n="footerContact">Contact Us</h3>
+        <p data-i18n="footerAddress">123 Farm Road, Gujarat, India</p>
+        <p data-i18n="footerPhone">+91 98765 43210</p>
+        <p data-i18n="footerEmail">info@soilvita.com</p>
+      </div>
+      <div>
+        <h3 data-i18n="footerLinks">Quick Links</h3>
+        <a href="index2.html" data-i18n="home">Home</a>
+        <a href="shop2.html" data-i18n="shop">Shop</a>
+        <a href="about2.html" data-i18n="about">About</a>
+        <a href="contact2.html" data-i18n="contact">Contact</a>
+      </div>
+      <div class="social-icons">
+        <h3 data-i18n="footerSocial">Follow Us</h3>
+        <a href="https://www.facebook.com/het.chovatiya" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/het_impex?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js2/products2.js"></script>
+  <script src="js2/i18n2.js"></script>
+  <script src="js2/script2.js"></script>
+  <script>
+    let currentFilters = { crop: [], nutrient: [], form: [] };
+    let currentSort = 'name';
+
+    // Render products with filters
+    function renderProducts(filteredProducts = products) {
+      const container = document.getElementById('products-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      // Apply filters
+      let displayProducts = filteredProducts.filter(product => {
+        const cropMatch = currentFilters.crop.length === 0 || product.cropSuitability.some(crop => currentFilters.crop.includes(crop));
+        const nutrientMatch = currentFilters.nutrient.length === 0 || currentFilters.nutrient.includes(product.mainCategory);
+        const formMatch = currentFilters.form.length === 0 || currentFilters.form.includes(product.form);
+        const priceMatch = (currentFilters.minPrice === undefined || product.priceINR >= currentFilters.minPrice) &&
+                          (currentFilters.maxPrice === undefined || product.priceINR <= currentFilters.maxPrice);
+        return cropMatch && nutrientMatch && formMatch && priceMatch;
+      });
+
+      // Apply sorting
+      displayProducts.sort((a, b) => {
+        switch (currentSort) {
+          case 'price-low': return a.priceINR - b.priceINR;
+          case 'price-high': return b.priceINR - a.priceINR;
+          case 'rating': return b.rating - a.rating;
+          default: return a.name.en.localeCompare(b.name.en);
+        }
+      });
+
+      // Update product count
+      const countEl = document.getElementById('product-count');
+      if (countEl) {
+        countEl.textContent = `Showing ${displayProducts.length} of ${products.length} products`;
+      }
+
+      displayProducts.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card clickable-card';
+        card.onclick = (e) => {
+          // Don't navigate if clicking on Add to Cart button
+          if (!e.target.classList.contains('btn-primary') && !e.target.closest('.btn-primary')) {
+            openProduct(product.id);
+          }
+        };
+        const stars = generateStars(product.rating);
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name[currentLang]}">
+          <h3>${product.name[currentLang]}</h3>
+          <p class="benefit">${product.shortDesc[currentLang]}</p>
+          <div class="rating">${stars} <span>(${product.reviews})</span></div>
+          <div class="price">₹${product.priceINR}</div>
+          <div class="card-actions">
+            <button onclick="addToCart(${product.id}, 1); event.stopPropagation();" class="btn-primary" data-i18n="addToCart">Add to Cart</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      updateUI();
+    }
+
+    function generateStars(rating) {
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 >= 0.5;
+      let stars = '';
+      for (let i = 0; i < fullStars; i++) stars += '★';
+      if (halfStar) stars += '☆';
+      while (stars.length < 5) stars += '☆';
+      return stars;
+    }
+
+    function updateFilters() {
+      currentFilters.crop = Array.from(document.querySelectorAll('input[data-filter="crop"]:checked')).map(cb => cb.value);
+      currentFilters.nutrient = Array.from(document.querySelectorAll('input[data-filter="nutrient"]:checked')).map(cb => cb.value);
+      currentFilters.form = Array.from(document.querySelectorAll('input[data-filter="form"]:checked')).map(cb => cb.value);
+      // Price filters will be handled in applyFilters
+    }
+
+    function applyFilters() {
+      updateFilters();
+      const minPrice = parseInt(document.getElementById('min-price').value);
+      const maxPrice = parseInt(document.getElementById('max-price').value);
+      currentFilters.minPrice = minPrice;
+      currentFilters.maxPrice = maxPrice;
+      renderProducts();
+      if (window.innerWidth <= 768) toggleFilters(); // Close on mobile
+    }
+
+    function clearFilters() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      document.getElementById('min-price').value = 0;
+      document.getElementById('max-price').value = 1000;
+      updatePriceDisplay();
+      currentFilters = { crop: [], nutrient: [], form: [], minPrice: 0, maxPrice: 1000 };
+      renderProducts();
+    }
+
+    function sortProducts() {
+      currentSort = document.getElementById('sort-select').value;
+      renderProducts();
+    }
+
+    function toggleFilters() {
+      const sidebar = document.querySelector('.filter-sidebar');
+      sidebar.classList.toggle('open');
+    }
+
+    function toggleFilterGroup(header) {
+      const group = header.parentElement;
+      group.classList.toggle('open');
+    }
+
+    function updatePriceDisplay() {
+      const min = document.getElementById('min-price').value;
+      const max = document.getElementById('max-price').value;
+      document.getElementById('min-price-display').textContent = `₹${min}`;
+      document.getElementById('max-price-display').textContent = `₹${max}`;
+    }
+
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'block' : 'none';
+      }
+    }
+
+    // Toggle mini cart
+    function toggleMiniCart() {
+      const overlay = document.getElementById('mini-cart-overlay');
+      const drawer = document.getElementById('mini-cart-drawer');
+      if (overlay && drawer) {
+        overlay.classList.toggle('active');
+        drawer.classList.toggle('active');
+        if (drawer.classList.contains('active')) {
+          renderMiniCart();
+        }
+      }
+    }
+
+    // Render mini cart
+    function renderMiniCart() {
+      const container = document.getElementById('mini-cart-content');
+      if (!container) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty</p>';
+        return;
+      }
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'mini-cart-item';
+          itemEl.innerHTML = `
+            <img src="${product.image}" alt="${product.name[currentLang]}">
+            <div class="mini-cart-item-details">
+              <h4>${product.name[currentLang]}</h4>
+              <div class="mini-cart-quantity">
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty - 1})">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+              <div class="mini-cart-price">₹${itemTotal}</div>
+            </div>
+            <button class="mini-cart-remove" onclick="removeFromMiniCart(${item.id})">×</button>
+          `;
+          container.appendChild(itemEl);
+        }
+      });
+    }
+
+    // Update quantity in mini cart
+    function updateMiniCartQuantity(id, newQty) {
+      if (newQty <= 0) {
+        removeFromMiniCart(id);
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        renderMiniCart();
+        renderProducts(); // Update product list if needed
+      }
+    }
+
+    // Remove from mini cart
+    function removeFromMiniCart(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      renderMiniCart();
+      renderProducts(); // Update product list if needed
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateFilters));
+      document.getElementById('min-price').addEventListener('input', updatePriceDisplay);
+      document.getElementById('max-price').addEventListener('input', updatePriceDisplay);
+      updatePriceDisplay();
+      updateCartBadge();
+    });
+  </script>
+</body>
+</html>

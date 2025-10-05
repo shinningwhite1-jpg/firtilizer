@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoilVita Fertilizers</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SoilVita Fertilizers</div>
+      <ul>
+        <li><a href="index2.html" data-i18n="home">Home</a></li>
+        <li><a href="shop2.html" data-i18n="shop">Shop</a></li>
+        <li><a href="about2.html" data-i18n="about">About</a></li>
+        <li><a href="contact2.html" data-i18n="contact">Contact</a></li>
+        <li><a href="cart2.html" data-i18n="cart">Cart</a></li>
+      </ul>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button onclick="switchLanguage('en')" data-i18n="english">EN</button>
+          <button onclick="switchLanguage('hi')" data-i18n="hindi">HI</button>
+          <button onclick="switchLanguage('gu')" data-i18n="gujarati">GU</button>
+        </div>
+        <div class="cart-icon" onclick="toggleMiniCart()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mini Cart Drawer -->
+  <div class="mini-cart-overlay" id="mini-cart-overlay" onclick="toggleMiniCart()"></div>
+  <div class="mini-cart-drawer" id="mini-cart-drawer">
+    <div class="mini-cart-header">
+      <h3 data-i18n="cart">Cart</h3>
+      <button class="close-btn" onclick="toggleMiniCart()">×</button>
+    </div>
+    <div class="mini-cart-content" id="mini-cart-content">
+      <!-- Cart items will be loaded here -->
+    </div>
+    <div class="mini-cart-footer">
+      <div class="mini-cart-subtotal">
+        <span data-i18n="subtotal">Subtotal</span>: <span id="mini-cart-subtotal">₹0</span>
+      </div>
+      <div class="mini-cart-actions">
+        <button onclick="window.location.href='cart2.html'" class="btn-secondary" data-i18n="viewFullCart">View Full Cart</button>
+        <button onclick="window.location.href='cart2.html'" class="btn-primary" data-i18n="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 data-i18n="heroTitle">Powering Growth Across Fields, Globally.</h1>
+      <p data-i18n="heroSubtitle">Innovating Fertilizer Solutions for a Sustainable Tomorrow.</p>
+      <div class="hero-buttons">
+        <a href="shop2.html" class="btn" data-i18n="exploreProducts">Explore Products</a>
+        <a href="#contact" class="btn btn-secondary" data-i18n="getInTouch">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/hero.jpg" alt="Fertilizer fields" style="width: 100%; height: auto;">
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <h2 data-i18n="whyChoose">Why Choose SoilVita?</h2>
+    <div class="why-choose">
+      <div>
+        <i class="fas fa-chart-line"></i>
+        <h3 data-i18n="highYield">High Yield</h3>
+        <p>Increase crop productivity by up to 40%.</p>
+      </div>
+      <div>
+        <i class="fas fa-leaf"></i>
+        <h3 data-i18n="ecoFriendly">Eco-Friendly Formulas</h3>
+        <p>Sustainable solutions reducing environmental impact.</p>
+      </div>
+      <div>
+        <i class="fas fa-flask"></i>
+        <h3 data-i18n="rdBacked">R&D Backed</h3>
+        <p>50+ years of scientific innovation.</p>
+      </div>
+      <div>
+        <i class="fas fa-globe"></i>
+        <h3 data-i18n="globalSupport">Global Support</h3>
+        <p>Expert assistance in 25+ countries.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <h2 data-i18n="productShowcase">Our Product Categories</h2>
+    <div class="products-grid" id="product-categories">
+      <!-- Product categories will be rendered here -->
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <h2 data-i18n="sustainability">Sustainability & Innovation</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+      <div>
+        <p data-i18n="rdDesc">Over 50 years of pioneering research in sustainable agriculture, reducing environmental impact by 30%.</p>
+        <ul style="margin-top: 1rem;">
+          <li>Advanced nutrient delivery systems</li>
+          <li>Precision farming technologies</li>
+          <li>Carbon-neutral production processes</li>
+        </ul>
+      </div>
+      <div>
+        <img src="images/lab.jpg" alt="R&D Lab" style="width: 100%; border-radius: 8px;">
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <h2 data-i18n="testimonials">Farmer Success Stories</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+      <div class="testimonial" style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <p data-i18n="testimonial1">“SoilVita fertilizers increased my crop yield by 40% while being eco-friendly.” - Rajesh Patel, Gujarat</p>
+      </div>
+      <div class="testimonial" style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <p data-i18n="testimonial2">“Reliable products and excellent support from the team.” - Meera Sharma, Rajasthan</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <h2 data-i18n="globalReach">Global Reach</h2>
+    <p data-i18n="globalDesc">Present in 25+ countries with trusted distributors worldwide.</p>
+    <div style="text-align: center; margin: 2rem 0;">
+      <img src="images/world-map.jpg" alt="Global presence" style="width: 100%; max-width: 800px; border-radius: 8px;">
+    </div>
+  </section>
+
+  <section class="section fade-in" id="contact">
+    <h2 data-i18n="inquiryForm">Send Inquiry</h2>
+    <div class="contact-content">
+      <div class="contact-form">
+        <form id="inquiry-form">
+          <input type="text" id="inquiry-name" data-i18n-placeholder="name" placeholder="Name" required>
+          <input type="email" id="inquiry-email" placeholder="Email" required>
+          <input type="tel" id="inquiry-phone" data-i18n-placeholder="phone" placeholder="Phone" required>
+          <select id="inquiry-product" data-i18n-placeholder="productInterest" required>
+            <option value="" data-i18n="productInterest">Product Interest</option>
+            <option value="nitrogen" data-i18n="nitrogen">Nitrogen</option>
+            <option value="phosphate" data-i18n="phosphate">Phosphate</option>
+            <option value="potash" data-i18n="potash">Potash</option>
+            <option value="bioFertilizer" data-i18n="bioFertilizer">Bio-Fertilizer</option>
+          </select>
+          <textarea id="inquiry-message" placeholder="Message"></textarea>
+          <button type="submit" data-i18n="sendInquiry">Send Inquiry</button>
+        </form>
+      </div>
+      <div>
+        <h3 data-i18n="locateDistributor">Locate Distributor</h3>
+        <p>Find authorized distributors in your region.</p>
+        <button class="btn" onclick="alert('Distributor locator coming soon!')" data-i18n="locateDistributor">Locate Distributor</button>
+        <h3 style="margin-top: 2rem;" data-i18n="requestSample">Request a Sample</h3>
+        <p>Get free samples of our products.</p>
+        <button class="btn" onclick="alert('Sample request coming soon!')" data-i18n="requestSample">Request a Sample</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3 data-i18n="footerContact">Contact Us</h3>
+        <p data-i18n="footerAddress">123 Farm Road, Gujarat, India</p>
+        <p data-i18n="footerPhone">+91 98765 43210</p>
+        <p data-i18n="footerEmail">info@soilvita.com</p>
+      </div>
+      <div>
+        <h3 data-i18n="footerLinks">Quick Links</h3>
+        <a href="index2.html" data-i18n="home">Home</a>
+        <a href="shop2.html" data-i18n="shop">Shop</a>
+        <a href="about2.html" data-i18n="about">About</a>
+        <a href="contact2.html" data-i18n="contact">Contact</a>
+      </div>
+      <div class="social-icons">
+        <h3 data-i18n="footerSocial">Follow Us</h3>
+        <a href="https://www.facebook.com/het.chovatiya" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/het_impex?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="admin-access">
+        <button onclick="accessAdmin()" style="background: #666; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Admin Access</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js2/products2.js"></script>
+  <script src="js2/i18n2.js"></script>
+  <script src="js2/script2.js"></script>
+  <script>
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'block' : 'none';
+      }
+    }
+
+    // Toggle mini cart
+    function toggleMiniCart() {
+      const overlay = document.getElementById('mini-cart-overlay');
+      const drawer = document.getElementById('mini-cart-drawer');
+      if (overlay && drawer) {
+        overlay.classList.toggle('active');
+        drawer.classList.toggle('active');
+        if (drawer.classList.contains('active')) {
+          renderMiniCart();
+        }
+      }
+    }
+
+    // Render mini cart
+    function renderMiniCart() {
+      const container = document.getElementById('mini-cart-content');
+      const subtotalEl = document.getElementById('mini-cart-subtotal');
+      if (!container || !subtotalEl) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty</p>';
+        subtotalEl.textContent = '₹0';
+        return;
+      }
+
+      let subtotal = 0;
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+          subtotal += itemTotal;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'mini-cart-item';
+          itemEl.innerHTML = `
+            <img src="${product.image}" alt="${product.name[currentLang]}">
+            <div class="mini-cart-item-details">
+              <h4>${product.name[currentLang]}</h4>
+              <div class="mini-cart-quantity">
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty - 1})">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+              <div class="mini-cart-price">₹${itemTotal}</div>
+            </div>
+            <button class="mini-cart-remove" onclick="removeFromMiniCart(${item.id})">×</button>
+          `;
+          container.appendChild(itemEl);
+        }
+      });
+
+      subtotalEl.textContent = `₹${subtotal}`;
+    }
+
+    // Update quantity in mini cart
+    function updateMiniCartQuantity(id, newQty) {
+      if (newQty <= 0) {
+        removeFromMiniCart(id);
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        renderMiniCart();
+      }
+    }
+
+    // Remove from mini cart
+    function removeFromMiniCart(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      renderMiniCart();
+    }
+
+    // Render product categories
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('product-categories');
+      const categories = ['Nitrogen', 'Phosphate', 'Potash', 'Bio-Fertilizer'];
+      categories.forEach(cat => {
+        const categoryProducts = products.filter(p => p.mainCategory === cat);
+        if (categoryProducts.length > 0) {
+          const card = document.createElement('div');
+          card.className = 'product-card category-card clickable-card';
+          card.onclick = () => {
+            window.location.href = `shop2.html?category=${cat}`;
+          };
+          card.innerHTML = `
+            <img src="${categoryProducts[0].image}" alt="${cat}">
+            <h3 data-i18n="${cat.toLowerCase()}">${cat}</h3>
+            <p>${categoryProducts.length} products available</p>
+            <div class="card-actions">
+              <button onclick="event.stopPropagation(); window.location.href='shop2.html?category=${cat}'" data-i18n="exploreProducts">Explore Products</button>
+            </div>
+          `;
+          container.appendChild(card);
+        }
+      });
+      updateCartBadge();
+      updateUI();
+    });
+
+    // Handle inquiry form
+    document.getElementById('inquiry-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('inquiry-name').value;
+      const email = document.getElementById('inquiry-email').value;
+      const phone = document.getElementById('inquiry-phone').value;
+      const product = document.getElementById('inquiry-product').value;
+      const message = document.getElementById('inquiry-message').value;
+
+      const subject = encodeURIComponent(`SoilVita Inquiry from ${name}`);
+      const body = encodeURIComponent(`New Inquiry Details:
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Product Interest: ${product}
+Message: ${message}
+
+--
+Sent from SoilVita Fertilizers Website`);
+
+      const mailtoURL = `mailto:9e14het.kesh@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = mailtoURL;
+
+      // Show success message
+      alert('Thank you for your inquiry! Your email client will open with the message ready to send.');
+    });
+
+    // Admin access
+    function accessAdmin() {
+      const password = prompt('Enter admin password:');
+      if (password === '8866753519') {
+        window.location.href = 'admin.html';
+      } else {
+        alert('Incorrect password!');
+      }
+    }
+  </script>
+</body>
+</html>

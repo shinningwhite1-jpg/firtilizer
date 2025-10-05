@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - SoilVita Fertilizers</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SoilVita Fertilizers</div>
+      <ul>
+        <li><a href="index2.html" data-i18n="home">Home</a></li>
+        <li><a href="shop2.html" data-i18n="shop">Shop</a></li>
+        <li><a href="about2.html" data-i18n="about">About</a></li>
+        <li><a href="contact2.html" data-i18n="contact">Contact</a></li>
+        <li><a href="cart2.html" data-i18n="cart">Cart</a></li>
+      </ul>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button onclick="switchLanguage('en')" data-i18n="english">EN</button>
+          <button onclick="switchLanguage('hi')" data-i18n="hindi">HI</button>
+          <button onclick="switchLanguage('gu')" data-i18n="gujarati">GU</button>
+        </div>
+        <div class="cart-icon" onclick="toggleMiniCart()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mini Cart Drawer -->
+  <div class="mini-cart-overlay" id="mini-cart-overlay" onclick="toggleMiniCart()"></div>
+  <div class="mini-cart-drawer" id="mini-cart-drawer">
+    <div class="mini-cart-header">
+      <h3 data-i18n="cart">Cart</h3>
+      <button class="close-btn" onclick="toggleMiniCart()">×</button>
+    </div>
+    <div class="mini-cart-content" id="mini-cart-content">
+      <!-- Cart items will be loaded here -->
+    </div>
+    <div class="mini-cart-footer">
+      <div class="mini-cart-actions">
+        <button onclick="window.location.href='cart2.html'" class="btn-secondary" data-i18n="viewFullCart">View Full Cart</button>
+        <button onclick="window.location.href='checkout2.html'" class="btn-primary" data-i18n="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="cart-section">
+    <div class="cart-container">
+      <div class="cart-items-section">
+        <h2 data-i18n="cart">Your Cart</h2>
+        <div id="cart-items">
+          <!-- Cart items will be rendered here -->
+        </div>
+      </div>
+
+      <div class="cart-summary-sidebar">
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+
+          <div class="summary-row">
+            <span data-i18n="subtotal">Subtotal</span>
+            <span id="subtotal">₹0</span>
+          </div>
+
+          <div class="shipping-calculator">
+            <label for="pincode">Shipping to Pincode:</label>
+            <input type="text" id="pincode" placeholder="Enter pincode" maxlength="6">
+            <button onclick="calculateShipping()" class="btn-secondary">Calculate</button>
+            <div class="shipping-result" id="shipping-result">
+              <span data-i18n="shipping">Shipping</span>: <span id="shipping">₹50</span>
+            </div>
+          </div>
+
+          <div class="discount-section">
+            <label for="discount-code">Discount Code:</label>
+            <input type="text" id="discount-code" placeholder="Enter code">
+            <button onclick="applyDiscount()" class="btn-secondary">Apply</button>
+            <div id="discount-message"></div>
+          </div>
+
+          <div class="summary-row total-row">
+            <span data-i18n="total">Total</span>
+            <span id="total">₹0</span>
+          </div>
+
+          <div class="trust-signals">
+            <div class="secure-checkout">
+              <i class="fas fa-lock"></i>
+              <span>Secure Checkout</span>
+            </div>
+            <div class="payment-methods">
+              <span>We accept:</span>
+              <div class="payment-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-google-pay"></i>
+                <i class="fab fa-amazon-pay"></i>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="window.location.href='checkout2.html'" class="btn-primary checkout-btn" data-i18n="checkout">Proceed to Checkout</button>
+          <button onclick="window.location.href='shop2.html'" class="btn-secondary continue-shopping" data-i18n="continueShopping">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </section>
+    <h2 data-i18n="cart">Cart</h2>
+    <div id="cart-items">
+      <!-- Cart items will be rendered here -->
+    </div>
+    <div class="cart-summary">
+      <p><strong data-i18n="subtotal">Subtotal</strong>: <span id="subtotal">₹0</span></p>
+      <p><strong data-i18n="shipping">Shipping</strong>: <span id="shipping">₹50</span></p>
+      <p><strong data-i18n="total">Total</strong>: <span id="total">₹0</span></p>
+    </div>
+    <div class="checkout-form" id="checkout-form">
+      <h3 data-i18n="checkout">Checkout</h3>
+      <input type="text" id="name" data-i18n-placeholder="name" placeholder="Name" required>
+      <input type="tel" id="phone" data-i18n-placeholder="phone" placeholder="Phone" required>
+      <input type="text" id="address" data-i18n-placeholder="address" placeholder="Address" required>
+      <button onclick="checkout()" data-i18n="placeOrder">Place Order</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3 data-i18n="footerContact">Contact Us</h3>
+        <p data-i18n="footerAddress">123 Farm Road, Gujarat, India</p>
+        <p data-i18n="footerPhone">+91 98765 43210</p>
+        <p data-i18n="footerEmail">info@soilvita.com</p>
+      </div>
+      <div>
+        <h3 data-i18n="footerLinks">Quick Links</h3>
+        <a href="index2.html" data-i18n="home">Home</a>
+        <a href="shop2.html" data-i18n="shop">Shop</a>
+        <a href="about2.html" data-i18n="about">About</a>
+        <a href="contact2.html" data-i18n="contact">Contact</a>
+      </div>
+      <div class="social-icons">
+        <h3 data-i18n="footerSocial">Follow Us</h3>
+        <a href="https://www.facebook.com/het.chovatiya" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/het_impex?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js2/products2.js"></script>
+  <script src="js2/i18n2.js"></script>
+  <script src="js2/script2.js"></script>
+  <script>
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'block' : 'none';
+      }
+    }
+
+    // Toggle mini cart
+    function toggleMiniCart() {
+      const overlay = document.getElementById('mini-cart-overlay');
+      const drawer = document.getElementById('mini-cart-drawer');
+      if (overlay && drawer) {
+        overlay.classList.toggle('active');
+        drawer.classList.toggle('active');
+        if (drawer.classList.contains('active')) {
+          renderMiniCart();
+        }
+      }
+    }
+
+    // Render mini cart
+    function renderMiniCart() {
+      const container = document.getElementById('mini-cart-content');
+      if (!container) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty</p>';
+        return;
+      }
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'mini-cart-item';
+          itemEl.innerHTML = `
+            <img src="${product.image}" alt="${product.name[currentLang]}">
+            <div class="mini-cart-item-details">
+              <h4>${product.name[currentLang]}</h4>
+              <div class="mini-cart-quantity">
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty - 1})">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+              <div class="mini-cart-price">₹${itemTotal}</div>
+            </div>
+            <button class="mini-cart-remove" onclick="removeFromMiniCart(${item.id})">×</button>
+          `;
+          container.appendChild(itemEl);
+        }
+      });
+    }
+
+    // Update quantity in mini cart
+    function updateMiniCartQuantity(id, newQty) {
+      if (newQty <= 0) {
+        removeFromMiniCart(id);
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        renderMiniCart();
+        renderCart(); // Update main cart if on cart page
+      }
+    }
+
+    // Remove from mini cart
+    function removeFromMiniCart(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      renderMiniCart();
+      renderCart(); // Update main cart if on cart page
+    }
+
+    // Render cart items in table format
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      if (!container) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty. <a href="shop2.html">Continue shopping</a></p>';
+        updateOrderSummary(0, 50, 0);
+        return;
+      }
+
+      const table = document.createElement('table');
+      table.className = 'cart-table';
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="cart-table-body"></tbody>
+      `;
+
+      const tbody = table.querySelector('#cart-table-body');
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+          subtotal += itemTotal;
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="product-info">
+              <img src="${product.image}" alt="${product.name[currentLang]}" class="cart-product-image">
+              <div>
+                <h4>${product.name[currentLang]}</h4>
+                <p>${product.shortDesc[currentLang]}</p>
+              </div>
+            </td>
+            <td>₹${product.priceINR}</td>
+            <td>
+              <div class="quantity-controls">
+                <button onclick="updateCartQuantity(${item.id}, ${item.qty - 1})">-</button>
+                <input type="number" value="${item.qty}" min="1" onchange="updateCartQuantity(${item.id}, parseInt(this.value))">
+                <button onclick="updateCartQuantity(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+            </td>
+            <td class="item-total">₹${itemTotal}</td>
+            <td><button onclick="removeFromCart(${item.id})" class="remove-btn">Remove</button></td>
+          `;
+          tbody.appendChild(row);
+        }
+      });
+
+      container.appendChild(table);
+
+      // Calculate shipping and total
+      const shipping = subtotal >= 999 ? 0 : 50;
+      const total = subtotal + shipping;
+      updateOrderSummary(subtotal, shipping, total);
+    }
+
+    // Update cart quantity
+    function updateCartQuantity(id, newQty) {
+      if (newQty <= 0) {
+        removeFromCart(id);
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        renderCart();
+      }
+    }
+
+    // Update order summary
+    function updateOrderSummary(subtotal, shipping, total) {
+      document.getElementById('subtotal').textContent = `₹${subtotal}`;
+      document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `₹${shipping}`;
+      document.getElementById('total').textContent = `₹${total}`;
+    }
+
+    // Calculate shipping based on pincode
+    function calculateShipping() {
+      const pincode = document.getElementById('pincode').value;
+      if (!pincode || pincode.length !== 6) {
+        alert('Please enter a valid 6-digit pincode');
+        return;
+      }
+
+      // Mock shipping calculation - in real app, this would call an API
+      let shipping = 50; // Default
+      if (pincode.startsWith('38')) { // Gujarat
+        shipping = 30;
+      } else if (pincode.startsWith('11') || pincode.startsWith('12')) { // Delhi/NCR
+        shipping = 40;
+      }
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const subtotal = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.id);
+        return sum + (product ? product.priceINR * item.qty : 0);
+      }, 0);
+
+      const total = subtotal + shipping;
+      updateOrderSummary(subtotal, shipping, total);
+    }
+
+    // Apply discount code
+    function applyDiscount() {
+      const code = document.getElementById('discount-code').value.toUpperCase();
+      const messageEl = document.getElementById('discount-message');
+
+      // Mock discount codes
+      let discount = 0;
+      if (code === 'SAVE10') {
+        discount = 0.1; // 10% off
+        messageEl.innerHTML = '<span style="color: green;">10% discount applied!</span>';
+      } else if (code === 'WELCOME') {
+        discount = 50; // ₹50 off
+        messageEl.innerHTML = '<span style="color: green;">₹50 discount applied!</span>';
+      } else {
+        messageEl.innerHTML = '<span style="color: red;">Invalid discount code</span>';
+        return;
+      }
+
+      // Apply discount to total
+      const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('₹', ''));
+      const shipping = document.getElementById('shipping').textContent === 'Free' ? 0 : parseFloat(document.getElementById('shipping').textContent.replace('₹', ''));
+      let discountedTotal = subtotal + shipping;
+
+      if (typeof discount === 'number' && discount < 1) {
+        discountedTotal = (subtotal * (1 - discount)) + shipping;
+      } else {
+        discountedTotal = subtotal + shipping - discount;
+      }
+
+      document.getElementById('total').textContent = `₹${Math.max(0, discountedTotal)}`;
+    }
+
+    // Proceed to checkout
+    function proceedToCheckout() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        alert('Your cart is empty');
+        return;
+      }
+
+      // Show checkout form (you can expand this)
+      const checkoutForm = document.getElementById('checkout-form');
+      if (checkoutForm) {
+        checkoutForm.style.display = 'block';
+        checkoutForm.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // If no checkout form, proceed directly
+        checkout();
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartBadge();
+      renderCart();
+      updateUI();
+    });
+  </script>
+</body>
+</html>

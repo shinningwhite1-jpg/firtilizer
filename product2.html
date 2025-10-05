@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product - SoilVita Fertilizers</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">SoilVita Fertilizers</div>
+      <ul>
+        <li><a href="index2.html" data-i18n="home">Home</a></li>
+        <li><a href="shop2.html" data-i18n="shop">Shop</a></li>
+        <li><a href="about2.html" data-i18n="about">About</a></li>
+        <li><a href="contact2.html" data-i18n="contact">Contact</a></li>
+        <li><a href="cart2.html" data-i18n="cart">Cart</a></li>
+      </ul>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button onclick="switchLanguage('en')" data-i18n="english">EN</button>
+          <button onclick="switchLanguage('hi')" data-i18n="hindi">HI</button>
+          <button onclick="switchLanguage('gu')" data-i18n="gujarati">GU</button>
+        </div>
+        <div class="cart-icon" onclick="toggleMiniCart()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mini Cart Drawer -->
+  <div class="mini-cart-overlay" id="mini-cart-overlay" onclick="toggleMiniCart()"></div>
+  <div class="mini-cart-drawer" id="mini-cart-drawer">
+    <div class="mini-cart-header">
+      <h3 data-i18n="cart">Cart</h3>
+      <button class="close-btn" onclick="toggleMiniCart()">×</button>
+    </div>
+    <div class="mini-cart-content" id="mini-cart-content">
+      <!-- Cart items will be loaded here -->
+    </div>
+    <div class="mini-cart-footer">
+      <div class="mini-cart-actions">
+        <button onclick="window.location.href='cart2.html'" class="btn-secondary" data-i18n="viewFullCart">View Full Cart</button>
+        <button onclick="window.location.href='checkout2.html'" class="btn-primary" data-i18n="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product PDP Container -->
+  <div class="product-pdp">
+    <!-- Above-the-Fold Section -->
+    <div class="pdp-above-fold">
+      <div class="pdp-grid">
+        <!-- Image Gallery -->
+        <div class="pdp-gallery">
+          <div class="main-image-container">
+            <img id="main-product-image" src="" alt="Product Image" class="main-product-image">
+            <div class="image-zoom-overlay" id="zoom-overlay">
+              <img src="" alt="Zoomed Image" class="zoomed-image" id="zoomed-image">
+            </div>
+          </div>
+          <div class="thumbnail-gallery" id="thumbnail-gallery">
+            <!-- Thumbnails will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Core Information -->
+        <div class="pdp-info">
+          <h1 id="product-title">Product Title</h1>
+
+          <div class="rating-summary">
+            <div class="stars" id="product-stars">
+              <!-- Stars will be populated by JavaScript -->
+            </div>
+            <span class="rating-score" id="rating-score">4.5</span>
+            <a href="#reviews-section" class="review-link" id="review-count">125 reviews</a>
+          </div>
+
+          <div class="key-benefits">
+            <h3>Key Benefits:</h3>
+            <ul id="benefits-list">
+              <!-- Benefits will be populated by JavaScript -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Buy Box -->
+        <div class="pdp-buy-box">
+          <div class="price-section">
+            <span class="current-price" id="current-price">₹299</span>
+            <span class="original-price" id="original-price">₹349</span>
+            <span class="discount-badge" id="discount-badge">15% OFF</span>
+          </div>
+
+          <div class="delivery-info">
+            <i class="fas fa-truck"></i>
+            <span id="delivery-text">Get it in 3-5 business days</span>
+          </div>
+
+          <div class="stock-info">
+            <span class="in-stock" id="stock-status">✓ In Stock</span>
+            <span class="stock-quantity" id="stock-quantity">Only 5 left!</span>
+          </div>
+
+          <div class="quantity-selector">
+            <label>Quantity:</label>
+            <div class="quantity-controls">
+              <button onclick="changeQuantity(-1)" id="qty-minus">-</button>
+              <input type="number" id="quantity-input" value="1" min="1" max="10" readonly>
+              <button onclick="changeQuantity(1)" id="qty-plus">+</button>
+            </div>
+          </div>
+
+          <div class="cta-buttons">
+            <button onclick="addToCartAndStay()" class="btn-primary add-to-cart-btn" id="add-to-cart-btn">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+            <button onclick="buyNow()" class="btn-secondary buy-now-btn" id="buy-now-btn">
+              <i class="fas fa-bolt"></i> Buy Now
+            </button>
+          </div>
+
+          <div class="secure-checkout">
+            <i class="fas fa-shield-alt"></i>
+            <span>Secure transaction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Below-the-Fold Section -->
+    <div class="pdp-below-fold">
+      <!-- Product Variations -->
+      <div class="pdp-section">
+        <h2>Size Options</h2>
+        <div class="variations-grid" id="variations-grid">
+          <!-- Variations will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Frequently Bought Together -->
+      <div class="pdp-section">
+        <h2>Frequently Bought Together</h2>
+        <div class="fbt-container">
+          <div class="fbt-products" id="fbt-products">
+            <!-- FBT products will be populated by JavaScript -->
+          </div>
+          <div class="fbt-total">
+            <div class="fbt-price" id="fbt-total-price">Total: ₹598</div>
+            <button class="btn-primary" onclick="addFBTToCart()">Add both to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Description -->
+      <div class="pdp-section">
+        <h2>Product Description</h2>
+        <div class="product-description" id="product-description">
+          <!-- Description will be populated by JavaScript -->
+        </div>
+        <div class="usage-instructions">
+          <h3>How to Use</h3>
+          <p id="usage-instructions">Usage instructions will be populated by JavaScript</p>
+        </div>
+      </div>
+
+      <!-- Technical Specifications -->
+      <div class="pdp-section">
+        <h2>Technical Specifications</h2>
+        <table class="specs-table" id="specs-table">
+          <!-- Specifications will be populated by JavaScript -->
+        </table>
+      </div>
+
+      <!-- Q&A Section -->
+      <div class="pdp-section">
+        <h2>Questions & Answers</h2>
+        <div class="qa-container">
+          <div class="ask-question">
+            <input type="text" placeholder="Have a question? Ask here..." id="question-input">
+            <button onclick="submitQuestion()" class="btn-primary">Ask Question</button>
+          </div>
+          <div class="qa-list" id="qa-list">
+            <!-- Q&A will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Reviews Section -->
+      <div class="pdp-section" id="reviews-section">
+        <h2>Customer Reviews</h2>
+
+        <!-- Rating Summary -->
+        <div class="rating-summary-detailed">
+          <div class="overall-rating">
+            <div class="rating-number" id="overall-rating">4.5</div>
+            <div class="rating-stars" id="overall-stars">
+              <!-- Stars will be populated -->
+            </div>
+            <div class="total-reviews" id="total-reviews">125 reviews</div>
+          </div>
+
+          <div class="rating-breakdown">
+            <div class="rating-bar">
+              <span>5 star</span>
+              <div class="bar"><div class="fill" style="width: 70%"></div></div>
+              <span>70%</span>
+            </div>
+            <div class="rating-bar">
+              <span>4 star</span>
+              <div class="bar"><div class="fill" style="width: 20%"></div></div>
+              <span>20%</span>
+            </div>
+            <div class="rating-bar">
+              <span>3 star</span>
+              <div class="bar"><div class="fill" style="width: 7%"></div></div>
+              <span>7%</span>
+            </div>
+            <div class="rating-bar">
+              <span>2 star</span>
+              <div class="bar"><div class="fill" style="width: 2%"></div></div>
+              <span>2%</span>
+            </div>
+            <div class="rating-bar">
+              <span>1 star</span>
+              <div class="bar"><div class="fill" style="width: 1%"></div></div>
+              <span>1%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Write Review -->
+        <div class="write-review">
+          <h3>Write a Review</h3>
+          <form id="review-form">
+            <div class="rating-input">
+              <label>Your Rating:</label>
+              <div class="star-rating">
+                <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+                <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+              </div>
+            </div>
+            <input type="text" placeholder="Your Name" id="reviewer-name" required>
+            <textarea placeholder="Write your review..." id="review-text" required></textarea>
+            <button type="submit" class="btn-primary">Submit Review</button>
+          </form>
+        </div>
+
+        <!-- Reviews List -->
+        <div class="reviews-list" id="reviews-list">
+          <!-- Reviews will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3 data-i18n="footerContact">Contact Us</h3>
+        <p data-i18n="footerAddress">123 Farm Road, Gujarat, India</p>
+        <p data-i18n="footerPhone">+91 98765 43210</p>
+        <p data-i18n="footerEmail">info@soilvita.com</p>
+      </div>
+      <div>
+        <h3 data-i18n="footerLinks">Quick Links</h3>
+        <a href="index2.html" data-i18n="home">Home</a>
+        <a href="shop2.html" data-i18n="shop">Shop</a>
+        <a href="about2.html" data-i18n="about">About</a>
+        <a href="contact2.html" data-i18n="contact">Contact</a>
+      </div>
+      <div class="social-icons">
+        <h3 data-i18n="footerSocial">Follow Us</h3>
+        <a href="https://www.facebook.com/het.chovatiya" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/het_impex?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js2/products2.js"></script>
+  <script src="js2/i18n2.js"></script>
+  <script src="js2/script2.js"></script>
+  <script>
+    let currentProduct = null;
+    let currentImageIndex = 0;
+    let selectedQuantity = 1;
+    let selectedVariation = null;
+
+    // Get product ID from URL
+    function getProductId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return parseInt(urlParams.get('id'));
+    }
+
+    // Render product details
+    function renderProductDetails() {
+      const productId = getProductId();
+      currentProduct = products.find(p => p.id === productId);
+
+      if (!currentProduct) {
+        document.querySelector('.product-pdp').innerHTML = '<p>Product not found</p>';
+        return;
+      }
+
+      // Set page title
+      document.title = `${currentProduct.name.en} - SoilVita Fertilizers`;
+
+      // Render above-the-fold
+      renderImageGallery();
+      renderProductInfo();
+      renderBuyBox();
+
+      // Render below-the-fold
+      renderVariations();
+      renderFBT();
+      renderDescription();
+      renderSpecifications();
+      renderQA();
+      renderReviews();
+
+      updateUI();
+    }
+
+    // Image Gallery
+    function renderImageGallery() {
+      const mainImage = document.getElementById('main-product-image');
+      const thumbnailGallery = document.getElementById('thumbnail-gallery');
+
+      if (currentProduct.images && currentProduct.images.length > 0) {
+        mainImage.src = currentProduct.images[0];
+        thumbnailGallery.innerHTML = '';
+
+        currentProduct.images.forEach((image, index) => {
+          const thumb = document.createElement('img');
+          thumb.src = image;
+          thumb.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+          thumb.onclick = () => changeMainImage(index);
+          thumbnailGallery.appendChild(thumb);
+        });
+      } else {
+        mainImage.src = currentProduct.image;
+      }
+
+      // Image zoom functionality
+      mainImage.onmousemove = handleImageZoom;
+      mainImage.onmouseleave = () => {
+        document.getElementById('zoom-overlay').style.display = 'none';
+      };
+    }
+
+    function changeMainImage(index) {
+      currentImageIndex = index;
+      const mainImage = document.getElementById('main-product-image');
+      const thumbnails = document.querySelectorAll('.thumbnail');
+
+      mainImage.src = currentProduct.images[index];
+      thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+      });
+    }
+
+    function handleImageZoom(e) {
+      const overlay = document.getElementById('zoom-overlay');
+      const zoomedImage = document.getElementById('zoomed-image');
+
+      overlay.style.display = 'block';
+      zoomedImage.src = currentProduct.images[currentImageIndex];
+
+      const rect = e.target.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      zoomedImage.style.transformOrigin = `${x}% ${y}%`;
+    }
+
+    // Product Info
+    function renderProductInfo() {
+      document.getElementById('product-title').textContent = currentProduct.name[currentLang];
+
+      // Rating
+      const starsContainer = document.getElementById('product-stars');
+      starsContainer.innerHTML = generateStars(currentProduct.rating);
+      document.getElementById('rating-score').textContent = currentProduct.rating;
+      document.getElementById('review-count').textContent = `${currentProduct.reviews} reviews`;
+
+      // Benefits
+      const benefitsList = document.getElementById('benefits-list');
+      benefitsList.innerHTML = currentProduct.benefits.map(benefit =>
+        `<li>${benefit}</li>`
+      ).join('');
+    }
+
+    function generateStars(rating) {
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 >= 0.5;
+      let stars = '';
+      for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
+      if (halfStar) stars += '<i class="fas fa-star-half-alt"></i>';
+      while (stars.length < 5) stars += '<i class="far fa-star"></i>';
+      return stars;
+    }
+
+    // Buy Box
+    function renderBuyBox() {
+      document.getElementById('current-price').textContent = `₹${currentProduct.priceINR}`;
+      document.getElementById('original-price').textContent = `₹${Math.round(currentProduct.priceINR * 1.15)}`;
+      document.getElementById('discount-badge').textContent = '15% OFF';
+      document.getElementById('delivery-text').textContent = 'Get it in 3-5 business days';
+      document.getElementById('stock-status').textContent = '✓ In Stock';
+      document.getElementById('stock-quantity').textContent = currentProduct.stock < 10 ? `Only ${currentProduct.stock} left!` : '';
+      document.getElementById('quantity-input').value = selectedQuantity;
+    }
+
+    // Quantity selector
+    function changeQuantity(delta) {
+      selectedQuantity = Math.max(1, Math.min(10, selectedQuantity + delta));
+      document.getElementById('quantity-input').value = selectedQuantity;
+    }
+
+    // Add to cart and stay
+    function addToCartAndStay() {
+      addToCart(currentProduct.id, selectedQuantity);
+    }
+
+    // Buy now
+    function buyNow() {
+      addToCart(currentProduct.id, selectedQuantity);
+      window.location.href = 'checkout2.html';
+    }
+
+    // Variations
+    function renderVariations() {
+      const container = document.getElementById('variations-grid');
+      if (!currentProduct.variations) return;
+
+      container.innerHTML = currentProduct.variations.map(variation => `
+        <button class="variation-btn ${variation.size === '10kg' ? 'active' : ''}"
+                onclick="selectVariation('${variation.size}', ${variation.price})">
+          ${variation.size} - ₹${variation.price}
+        </button>
+      `).join('');
+    }
+
+    function selectVariation(size, price) {
+      document.querySelectorAll('.variation-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('current-price').textContent = `₹${price}`;
+    }
+
+    // Frequently Bought Together
+    function renderFBT() {
+      const relatedProducts = products.filter(p => p.id !== currentProduct.id).slice(0, 2);
+      const container = document.getElementById('fbt-products');
+
+      container.innerHTML = `
+        <div class="fbt-item">
+          <img src="${currentProduct.images ? currentProduct.images[0] : currentProduct.image}" alt="${currentProduct.name.en}">
+          <div class="fbt-info">
+            <h4>${currentProduct.name.en}</h4>
+            <p>₹${currentProduct.priceINR}</p>
+          </div>
+        </div>
+        <span class="fbt-plus">+</span>
+        ${relatedProducts.map(product => `
+          <div class="fbt-item">
+            <img src="${product.image}" alt="${product.name.en}">
+            <div class="fbt-info">
+              <h4>${product.name.en}</h4>
+              <p>₹${product.priceINR}</p>
+            </div>
+          </div>
+          <span class="fbt-plus">+</span>
+        `).join('')}
+      `;
+
+      const total = currentProduct.priceINR + relatedProducts.reduce((sum, p) => sum + p.priceINR, 0);
+      document.getElementById('fbt-total-price').textContent = `Total: ₹${total}`;
+    }
+
+    function addFBTToCart() {
+      addToCart(currentProduct.id, 1);
+      const relatedProducts = products.filter(p => p.id !== currentProduct.id).slice(0, 2);
+      relatedProducts.forEach(product => addToCart(product.id, 1));
+    }
+
+    // Description
+    function renderDescription() {
+      document.getElementById('product-description').innerHTML = `
+        <p>${currentProduct.longDesc[currentLang]}</p>
+        <h4>Key Features:</h4>
+        <ul>
+          ${currentProduct.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+        </ul>
+      `;
+      document.getElementById('usage-instructions').textContent = currentProduct.directions[currentLang];
+    }
+
+    // Specifications
+    function renderSpecifications() {
+      const specs = currentProduct.specifications;
+      const table = document.getElementById('specs-table');
+
+      table.innerHTML = Object.entries(specs).map(([key, value]) => `
+        <tr>
+          <td>${key}</td>
+          <td>${value}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Q&A
+    function renderQA() {
+      const qaList = document.getElementById('qa-list');
+      qaList.innerHTML = `
+        <div class="qa-item">
+          <div class="qa-question">How should I store this fertilizer?</div>
+          <div class="qa-answer">Store in a cool, dry place away from direct sunlight and moisture.</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question">What is the shelf life?</div>
+          <div class="qa-answer">2 years from date of manufacture when stored properly.</div>
+        </div>
+      `;
+    }
+
+    function submitQuestion() {
+      const question = document.getElementById('question-input').value;
+      if (question.trim()) {
+        alert('Your question has been submitted. We will respond soon!');
+        document.getElementById('question-input').value = '';
+      }
+    }
+
+    // Reviews
+    function renderReviews() {
+      document.getElementById('overall-rating').textContent = currentProduct.rating;
+      document.getElementById('overall-stars').innerHTML = generateStars(currentProduct.rating);
+      document.getElementById('total-reviews').textContent = `${currentProduct.reviews} reviews`;
+
+      const reviewsList = document.getElementById('reviews-list');
+      reviewsList.innerHTML = `
+        <div class="review-item">
+          <div class="review-header">
+            <div class="review-rating">${generateStars(5)}</div>
+            <span class="review-author">Rajesh Patel, Gujarat</span>
+            <span class="review-date">2 weeks ago</span>
+          </div>
+          <div class="review-content">
+            <p>Excellent product! Increased my crop yield by 35%. The quality is outstanding and delivery was prompt. Will definitely buy again.</p>
+          </div>
+        </div>
+        <div class="review-item">
+          <div class="review-header">
+            <div class="review-rating">${generateStars(4)}</div>
+            <span class="review-author">Meera Sharma, Rajasthan</span>
+            <span class="review-date">1 month ago</span>
+          </div>
+          <div class="review-content">
+            <p>Good quality fertilizer. Delivery was on time and packaging was excellent. Saw noticeable improvement in my vegetable garden.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Review form submission
+    document.getElementById('review-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const rating = document.querySelector('input[name="rating"]:checked')?.value;
+      const name = document.getElementById('reviewer-name').value;
+      const text = document.getElementById('review-text').value;
+
+      if (rating && name && text) {
+        alert('Thank you for your review! It will be published after moderation.');
+        document.getElementById('review-form').reset();
+      }
+    });
+
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'block' : 'none';
+      }
+    }
+
+    // Toggle mini cart
+    function toggleMiniCart() {
+      const overlay = document.getElementById('mini-cart-overlay');
+      const drawer = document.getElementById('mini-cart-drawer');
+      if (overlay && drawer) {
+        overlay.classList.toggle('active');
+        drawer.classList.toggle('active');
+        if (drawer.classList.contains('active')) {
+          renderMiniCart();
+        }
+      }
+    }
+
+    // Render mini cart
+    function renderMiniCart() {
+      const container = document.getElementById('mini-cart-content');
+      if (!container) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty</p>';
+        return;
+      }
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'mini-cart-item';
+          itemEl.innerHTML = `
+            <img src="${product.image}" alt="${product.name[currentLang]}">
+            <div class="mini-cart-item-details">
+              <h4>${product.name[currentLang]}</h4>
+              <div class="mini-cart-quantity">
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty - 1})">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+              <div class="mini-cart-price">₹${itemTotal}</div>
+            </div>
+            <button class="mini-cart-remove" onclick="removeFromMiniCart(${item.id})">×</button>
+          `;
+          container.appendChild(itemEl);
+        }
+      });
+    }
+
+    // Update quantity in mini cart
+    function updateMiniCartQuantity(id, newQty) {
+      if (newQty <= 0) {
+        removeFromMiniCart(id);
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        renderMiniCart();
+      }
+    }
+
+    // Remove from mini cart
+    function removeFromMiniCart(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      renderMiniCart();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProductDetails();
+      updateCartBadge();
+    });
+  </script>
+  <script>
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'block' : 'none';
+      }
+    }
+
+    // Toggle mini cart
+    function toggleMiniCart() {
+      const overlay = document.getElementById('mini-cart-overlay');
+      const drawer = document.getElementById('mini-cart-drawer');
+      if (overlay && drawer) {
+        overlay.classList.toggle('active');
+        drawer.classList.toggle('active');
+        if (drawer.classList.contains('active')) {
+          renderMiniCart();
+        }
+      }
+    }
+
+    // Render mini cart
+    function renderMiniCart() {
+      const container = document.getElementById('mini-cart-content');
+      if (!container) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty</p>';
+        return;
+      }
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+          const itemTotal = product.priceINR * item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'mini-cart-item';
+          itemEl.innerHTML = `
+            <img src="${product.image}" alt="${product.name[currentLang]}">
+            <div class="mini-cart-item-details">
+              <h4>${product.name[currentLang]}</h4>
+              <div class="mini-cart-quantity">
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty - 1})">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateMiniCartQuantity(${item.id}, ${item.qty + 1})">+</button>
+              </div>
+              <div class="mini-cart-price">₹${itemTotal}</div>
+            </div>
+            <button class="mini-cart-remove" onclick="removeFromMiniCart(${item.id})">×</button>
+          `;
+          container.appendChild(itemEl);
+        }
+      });
+    }
+
+    // Update quantity in mini cart
+    function updateMiniCartQuantity(id, newQty) {
+      if (newQty <= 0) {
+        removeFromMiniCart(id);
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const item = cart.find(item => item.id === id);
+      if (item) {
+        item.qty = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+        renderMiniCart();
+      }
+    }
+
+    // Remove from mini cart
+    function removeFromMiniCart(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      renderMiniCart();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartBadge();
+      updateUI();
+    });
+  </script>
+</body>
+</html>

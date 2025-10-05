@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - SoilVita Fertilizers</title>
+  <link rel="stylesheet" href="css2/style2.css">
+  <style>
+    .admin-login {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1B4D3E 0%, #0F2F24 100%);
+    }
+
+    .login-container {
+      background: white;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-container h1 {
+      color: #1B4D3E;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e9ecef;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #1B4D3E;
+    }
+
+    .login-btn {
+      background: #1B4D3E;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .login-btn:hover {
+      background: #0F2F24;
+      transform: translateY(-1px);
+    }
+
+    .back-link {
+      margin-top: 1.5rem;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-link:hover {
+      color: #1B4D3E;
+    }
+
+    .admin-icon {
+      font-size: 3rem;
+      color: #1B4D3E;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-login">
+    <div class="login-container">
+      <div class="admin-icon">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <h1>Admin Login</h1>
+      <form class="login-form" id="admin-login-form">
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" required placeholder="Enter admin password">
+        </div>
+        <button type="submit" class="login-btn">Login to Dashboard</button>
+      </form>
+      <a href="index2.html" class="back-link">← Back to Website</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('admin-password').value;
+
+      if (password === '8866753519') {
+        // Set admin session
+        localStorage.setItem('adminLoggedIn', 'true');
+        localStorage.setItem('adminLoginTime', Date.now());
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        alert('Incorrect password! Access denied.');
+        document.getElementById('admin-password').value = '';
+      }
+    });
+
+    // Check if already logged in
+    if (localStorage.getItem('adminLoggedIn') === 'true') {
+      // Check if login is still valid (24 hours)
+      const loginTime = parseInt(localStorage.getItem('adminLoginTime'));
+      const now = Date.now();
+      const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+
+      if (hoursDiff < 24) {
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        // Session expired
+        localStorage.removeItem('adminLoggedIn');
+        localStorage.removeItem('adminLoginTime');
+      }
+    }
+  </script>
+</body>
+</html>
